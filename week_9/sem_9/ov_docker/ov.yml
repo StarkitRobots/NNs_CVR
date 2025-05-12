@@ -1,0 +1,22 @@
+services:
+  ros: # Service name
+    image: ubuntu_2020/ov_2022.1.0:latest # Specifies the Docker image to use for this service
+    container_name: openvino_container # Sets the container name to "ros"
+    user: "root"
+    network_mode: host # Uses the host's networking stack (container shares the host's network)
+    ipc: host
+    volumes:
+      - /home/simens/Starkit/CVR_NNs/devices/ov_ws/:/root/workspace/
+      - /dev/bus/usb:/dev/bus/usb
+      - ~/.Xauthority:/root/.Xauthority
+      - /tmp/.X11-unix/:/tmp/.X11-unix/
+      - /tmp:/share
+    environment:
+      - color_prompt=yes # Environment variable for colored prompts
+    tty: true # Allocates a TTY for the container, useful for interactive shells
+    stdin_open: true # Keeps stdin open to support interactive processes
+    devices:
+      - /dev/dri/:/dev/dri/ # Maps the /dev directory to access host devices (repeated for completeness
+    device_cgroup_rules:
+      - 'c 189:* rmw'
+    command: 

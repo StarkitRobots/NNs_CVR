@@ -1,0 +1,1 @@
+docker build -t ubuntu_2020/ov_2022.1.0 .
